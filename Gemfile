@@ -14,6 +14,8 @@ gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
+gem 'rerun'
+gem 'rb-fsevent'
 
 group :test do
   gem 'faker'

@@ -3,7 +3,7 @@
     margin: 20px auto;
     width: 600px;
     padding: 0px 20px 20px 20px;
-    border: 1px dotted black;
+    border: 1px solid black;
   }
   th {
     text-align: left;
@@ -11,25 +11,26 @@
 </style>
 
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <h1>Welcome to the Sinatra URL shortener!</h1>
+  <p>Do you have a long url you'd like to shorten?</p>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+  <form action="/urls" method="post">
+    <label for="url">Enter your url:</label>
+    <input type="text" name="url" />
+    <input type="submit" value="Go for it!" />
+  </form>
+
+  <% if @url %>
+    <p>Here's your new url: <a href="<%= @url.short_url %>">http://sho.rt/<%= @url.short_url %></a></p>
+  <% end %>
+
+  <p>Check out some recently created url's:</p>
+  <ul>
+    <% @urls.each do |url| %>
+      <li>
+        <span><%= url.click_count %> users have visited </span>
+        <a href= "/<%= url.short_url %>"><%= url.long_url %></a>
+      </li>
+    <% end %>
+  </ul>
 </div>
