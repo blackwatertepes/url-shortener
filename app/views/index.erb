@@ -23,7 +23,7 @@
   <% if @url %>
     <p>Here's your new url: <a href="<%= @url.short_url %>">http://sho.rt/<%= @url.short_url %></a></p>
   <% end %>
-
+  <br/>
   <p>Check out some recently created url's:</p>
   <ul>
     <% @urls.each do |url| %>
