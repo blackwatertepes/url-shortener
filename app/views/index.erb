@@ -22,6 +22,8 @@
 
   <% if @url %>
     <p>Here's your new url: <a href="<%= @url.short_url %>">http://sho.rt/<%= @url.short_url %></a></p>
+  <% elsif @error %>
+    <p>That was an invalid url. Please try again.</p>
   <% end %>
   <br/>
   <p>Check out some recently created url's:</p>
