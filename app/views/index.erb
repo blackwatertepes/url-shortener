@@ -1,38 +1,14 @@
-<style type="text/css">
-  .container {
-    margin: 20px auto;
-    width: 600px;
-    padding: 0px 20px 20px 20px;
-    border: 1px solid black;
-  }
-  th {
-    text-align: left;
-  }
-</style>
-
 <div class="container">
-  <h1>Welcome to the Sinatra URL shortener!</h1>
-  <p>Do you have a long url you'd like to shorten?</p>
-
-  <form action="/urls" method="post">
+  <h3>URL Shortnr</h3>
+  <form action="/url" method="post">
     <label for="url">Enter your url:</label>
     <input type="text" name="url" />
-    <input type="submit" value="Go for it!" />
+    <input type="submit" value="Shortn" class="button" />
   </form>
 
   <% if @url %>
-    <p>Here's your new url: <a href="<%= @url.short_url %>">http://sho.rt/<%= @url.short_url %></a></p>
+    <p>Here's your new url: <a href="<%= @url.short_url %>">http://localhost:9292/<%= @url.short_url %></a></p>
   <% elsif @error %>
     <p>That was an invalid url. Please try again.</p>
   <% end %>
-  <br/>
-  <p>Check out some recently created url's:</p>
-  <ul>
-    <% @urls.each do |url| %>
-      <li>
-        <span><%= url.click_count %> users have visited </span>
-        <a href= "/<%= url.short_url %>"><%= url.long_url %></a>
-      </li>
-    <% end %>
-  </ul>
 </div>

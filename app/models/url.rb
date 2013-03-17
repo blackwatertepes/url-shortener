@@ -5,8 +5,26 @@ class Url < ActiveRecord::Base
     :message => "Please input a valid url."}
 
   def create_short_url
-    url = [('a'..'z').to_a,(0..9).to_a].flatten.shuffle[0...4].join('')
-    return self.short_url = url unless Url.where('short_url = ?', url).count > 0
-    return create_short_url
+    id = 1
+    id = Url.last.id + 1 if Url.last
+    self.short_url = Url.obfuscate_id(id)
+  end
+
+  def self.string
+    [('a'..'z').to_a, ('A'..'Z').to_a, (0..9).to_a, '$','-','_','.','+','!','*','(',')',',',"'"].flatten
+  end
+
+  def self.rand_char
+    self.string.sample.to_s
+  end
+
+  def self.encode_id(id)
+    div, mod = id.divmod(self.string.length)
+    return self.string[div].to_s << self.string[mod].to_s if div < self.string.length
+    self.encode_id(div) << self.string[mod].to_s
+  end
+
+  def self.obfuscate_id(id)
+    self.encode_id(id) << self.rand_char
   end
 end
