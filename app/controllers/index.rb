@@ -13,6 +13,16 @@ post '/url' do
   end
 end
 
+get '/recent' do
+  @urls = Url.order("id DESC").limit(20)
+  erb :list
+end
+
+get '/popular' do
+  @urls = Url.order("click_count DESC").limit(20)
+  erb :list
+end
+
 get '/:short_url' do
   url = Url.find_by_short_url(params[:short_url])
   url.click_count += 1

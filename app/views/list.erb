@@ -1,0 +1,5 @@
+<ul>
+  <% @urls.each do |url| %>
+    <li><a href="<%= url.long_url %>"><%= url.long_url %></a> | <a href="<%= url.short_url %>"><%= url.short_url %></a> | <span><%= url.click_count %></span></li>
+  <% end %>
+</ul>
