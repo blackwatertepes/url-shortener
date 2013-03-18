@@ -1,13 +1,12 @@
 <div class="container">
-  <h3>URL Shortnr</h3>
+  <h3>UrlGo</h3>
   <form action="/url" method="post">
     <label for="url">Enter your url:</label>
     <input type="text" name="url" />
     <input type="submit" value="Shortn" class="button" />
   </form>
-
   <% if @url %>
-    <p>Here's your new url: <a href="<%= @url.short_url %>">http://localhost:9292/<%= @url.short_url %></a></p>
+    <p>Here's your new url: <a href="<%= @url.short_url %>"><%= "#{env['HTTP_HOST']}/#{@url.short_url}" %></a></p>
   <% elsif @error %>
     <p>That was an invalid url. Please try again.</p>
   <% end %>
